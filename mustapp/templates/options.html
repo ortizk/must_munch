@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+	<h1>this is the {{ option_cat }} page</h1>
+	<div class='row'>
+		{% for op in option%}
+			<div class='col m3 offset-m1'>
+				{% if op.image not " " %}
+					<img src="{{ op.image }}">
+				{% else %}
+					<img src="http://via.placeholder.com/300"> 
+				{% endif %}
+				<p>{{ op.restname }}</p>
+				<p>{{ op.cuisine }}</p>
+				<p>{{ op.description }}</p>
+				<p>{{ op.address }}</p>
+				<p>{{ op.phone }}</p>
+				<a href='{{ op.website }}' target="_blank" >website</a>
+			</div>	
+		{% endfor %}
+	</div>
+
+{% endblock %}
