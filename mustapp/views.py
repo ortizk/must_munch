@@ -1,9 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.views.generic.edit import UpdateView
 from .models import Options
 from .forms import LoginForm
+from django.urls import reverse
+from django.views import generic
+from django.urls import reverse_lazy
+
 
 def index(request):
 	return render(request, 'index.html')
@@ -23,3 +28,30 @@ def options(request, option_cat):
 	else:
 		return HttpResponse('ELSE: that is not an option')
 	# return render(request, 'options.html', { 'option': options })
+
+def upvote(request, rest_id, option_cat):
+    rest = Options.objects.get(pk=rest_id)
+    rest.rate += 1
+    rest.save(['rate'])
+    return render ('options.html')
+
+# class Upvote(UpdateView):
+# 	model = Options
+# 	fields = ['rate']
+# 	success_url = reverse_lazy('[options.html]')
+# 	pass
+
+def vote(request, rest_id):
+	restaurant = get_object_or_404(Options, pk=rest_id)
+	try:
+		upvote = options.rate_set.get(pk=request.POST['rate'])
+	except (KeyError, Options.DoesNotExist):
+		return HttpResponse('except at def vote')
+	else:
+		upvote.rate += 1
+		upvote.save()
+		return HttpResponseRedirect(reverse('options:rate', args=(rest.id,)))
+
+
+
+

@@ -2,12 +2,21 @@
 {% load staticfiles %}
 
 {% block content %}
-
-	<h1>Must Munch<h1>
-	<h2>Where Will You Be Munching Today?</h2>
-	<form action="seattle/">
-    	<input type="submit" value="Seattle" class="btn" />
-	</form>
+	<div class="row">
+		<div class="back-city">
+			<h2 class="center">Where Will You Be Munching Today?</h2>
+			<br/>
+			<form class="center" action="seattle/">
+		    	<input type="submit" value="SEATTLE" class="city" />
+			</form>
+		</div>
+	</div>
+	<h4 class='coming-soon-text center'><i>Coming Soon...</i></h4>
+	<div class="row">
+		<form class="center" action="portland/">
+		    <input type="submit" value="PORTLAND" class="city coming-soon" />
+		</form>
+	</div>
 	
 
 {% endblock %}

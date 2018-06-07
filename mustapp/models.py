@@ -11,7 +11,7 @@ class Options(models.Model):
 	website = models.CharField(max_length=100)
 	rate = models.IntegerField()
 	description = models.CharField(max_length=1000)
-	image = models.ImageField(upload_to='items/%Y/%m/%d', blank=True)
+	image = models.CharField(max_length=1000)
 
 	def __str__(self):
 		return self.restname

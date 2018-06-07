@@ -3,22 +3,66 @@
 
 {% block content %}
 
-	<h1>this is the {{ option_cat }} page</h1>
+	<h1 class="center cat-header">{{ option_cat }}</h1>
+	  <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+      	{% if option_cat == 'drinks' %}
+	        <li class="tab col s6"><a class="active" href="eats/">Eats</a></li>
+	        <li class="tab col s6"><a href="datenight/">Dates</a></li>
+	    {% elif option_cat == 'eats' %}
+	        <li class="tab col s6"><a href="drinks/">Drinks</a></li>
+	        <li class="tab col s6"><a href="datenight/">Dates</a></li>
+	    {% elif option_cat == 'datenight' %}
+	        <li class="tab col s6"><a class="active" href="/eats">Eats</a></li>
+	        <li class="tab col s6"><a href="drinks/">Drinks</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
 	<div class='row'>
-		{% for op in option%}
-			<div class='col m3 offset-m1'>
-				{% if op.image not " " %}
-					<img src="{{ op.image }}">
-				{% else %}
-					<img src="http://via.placeholder.com/300"> 
-				{% endif %}
-				<p>{{ op.restname }}</p>
-				<p>{{ op.cuisine }}</p>
-				<p>{{ op.description }}</p>
-				<p>{{ op.address }}</p>
-				<p>{{ op.phone }}</p>
-				<a href='{{ op.website }}' target="_blank" >website</a>
-			</div>	
+		{% for op in option|dictsort:"pricepoint" %}
+			<div class="col s12 m12">
+				<div class="card horizontal">
+					<div class="card-image">
+						<img src="{{ op.image }}">
+					</div>
+					<div class="card-stacked">
+						<div class="card-content">
+							<strong>{{ op.restname }}</strong>
+							<p><i>{{ op.cuisine }}</i></p>
+							{% if op.pricepoint == 1 %}
+								{% for i in 'x' %}
+									<i class="material-icons">attach_money</i>
+								{% endfor %}
+							{% elif op.pricepoint == 2 %}
+								{% for i in 'xx' %}
+									<i class="material-icons">attach_money</i>
+								{% endfor %}
+							{% elif op.pricepoint == 3 %}
+								{% for i in 'xxx' %}
+									<i class="material-icons">attach_money</i>
+								{% endfor %}
+							{% endif %}
+							<p>{{ op.description }}</p>
+						</div>
+						<div class="fix">
+							{% if op.rate == 0 %}
+								<a href="vote/{{ op.id }}"><i class="material-icons">star</i></a>Be the first to rate this MM spot
+							{% else %}
+								<a href="vote/{{ op.id }}"><i class="material-icons">star</i></a>{{op.rate}}
+							{% endif %}
+						</div>
+
+						
+						
+						<div class="card-action">
+							<a href="http://maps.google.com/maps?q={{op.restname}}" target="_blank">{{ op.address }}</a>
+							<a href='{{ op.website }}' target="_blank" >website</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		{% endfor %}
 	</div>
 
