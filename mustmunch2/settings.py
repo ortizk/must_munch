@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'mustmunch2.wsgi.application'
 
 DATABASES = {}
 DATABASES['default'] = dj_database_url.config(
-    default=''
+    default='postgres://qjxxnnsmcmzmzs:c4a1a3284ae2441c1b434538c5cdfab870ed51a259169740a105021fa0aed586@ec2-54-204-18-53.compute-1.amazonaws.com:5432/d6f61u9043gu9n'
 )
 
 
