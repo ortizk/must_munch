@@ -30,17 +30,29 @@ def options(request, option_cat):
 		return HttpResponse('ELSE: that is not an option')
 	# return render(request, 'options.html', { 'option': options })
 
-def upvote(request, rest_id, option_cat):
-    rest = Options.objects.get(pk=rest_id)
-    rest.rate += 1
-    rest.save(['rate'])
-    return render ('options.html')
+# def upvote(request, rest_id, option_cat):
+#     rest = Options.objects.get(pk=rest_id)
+#     rest.rate += 1
+#     rest.save(['rate'])
+#     return render ('options.html')
 
 # class Upvote(UpdateView):
 # 	model = Options
 # 	fields = ['rate']
 # 	success_url = reverse_lazy('[options.html]')
 # 	pass
+
+def upvote(request):
+	rest_id = request.GET.get('rest_id', None)
+
+	likes = 0
+	if (cat_id):
+		cat = Cat.objects.get(id=int(cat_id))
+		if cat is not None:
+			likes = cat.likes + 1
+			cat.likes = likes
+			cat.save()
+		return HttpResponse(likes)
 
 def vote(request, rest_id):
 	restaurant = get_object_or_404(Options, pk=rest_id)
