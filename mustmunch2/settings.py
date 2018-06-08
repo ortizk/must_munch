@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '&d6f4n9%de%a60+w_b4#r%f)p*2z2yyeak28omhewkq2nad!9b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['mustmunch.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -74,13 +75,18 @@ WSGI_APPLICATION = 'mustmunch2.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'options',
-            'HOST': 'localhost'
-     }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'options',
+#             'HOST': 'localhost'
+#      }
+# }
+
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(
+    default=''
+)
 
 
 # Password validation
