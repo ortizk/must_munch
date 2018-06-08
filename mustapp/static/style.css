@@ -55,7 +55,22 @@ h2 {
 	display: flex!important;
 	align-items: center!important;
 }
-.card {
-	box-shadow: #ffffff!important;
+.auth-header {
+	color: white;
+	font-family: 'Open Sans', sans-serif;
 }
-
+.auth-form {
+	background:rgba(255,255,255, 0.5);
+	/*opacity: .2;*/
+	padding: 20px;
+	border-radius: 25px;
+	font-family: 'Sonsie One', cursive;
+	color: white;
+}
+form label {
+	color: white;
+}
+.info {
+	color: white!important;
+	font-family: 'Open Sans', sans-serif!important;
+}

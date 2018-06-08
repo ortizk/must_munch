@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<h1 class="auth-header">Sign Up</h1>
+<form method="POST" class="auth-form" action=".">
+  {% csrf_token %}
+  {{ form.as_p}}
+  <input type="submit" value="Submit" class="btn black" />
+</form>
+
+{% endblock %}
